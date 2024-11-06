@@ -8,10 +8,12 @@ WORKDIR /app
 COPY . /app
 
 # Install any dependencies your app needs (make sure Streamlit is in requirements.txt)
-RUN pip install -r requirements.txt
+#RUN pip install -r requirements.txt
 
 # If you don't have requirements.txt, uncomment the line below to install Streamlit directly
 # RUN pip install streamlit
+
+RUN pip install streamlit tensorflow
 
 # Expose the default Streamlit port
 EXPOSE 8501
