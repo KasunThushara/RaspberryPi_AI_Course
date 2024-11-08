@@ -18,7 +18,7 @@ WORKDIR /app
 COPY . /app
 
 # Install Python dependencies
-RUN pip install --no-cache-dir streamlit tensorflow-cpu  # or tensorflow-lite if available
+RUN pip install --no-cache-dir streamlit tensorflow  # or tensorflow-lite if available
 
 # Expose the default Streamlit port
 EXPOSE 8501
