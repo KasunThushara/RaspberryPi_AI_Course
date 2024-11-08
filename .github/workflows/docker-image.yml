@@ -21,7 +21,7 @@ jobs:
 
       # Step 3: Build the Docker image
       - name: Build Docker image
-        run:  docker build --platform linux/arm64 -t kasun594/raspberry_pi_ai_course:latest .
+        run:  docker buildx build --platform linux/arm64 -t kasun594/raspberry_pi_ai_course:latest .
 
       # Step 4: Push the Docker image to Docker Hub
       - name: Push Docker image
