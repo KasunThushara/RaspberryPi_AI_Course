@@ -1,5 +1,15 @@
 # Use a base image with Python 3.11 installed
-FROM python:3.11-slim-bullseye
+FROM arm64v8/python:3.11-slim
+
+# Set environment variables for Python
+ENV PYTHONUNBUFFERED=1
+
+# Install OS-level dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libjpeg-dev \
+    zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory in the container
 WORKDIR /app
@@ -7,13 +17,8 @@ WORKDIR /app
 # Copy the contents of your app to the working directory
 COPY . /app
 
-# Install any dependencies your app needs (make sure Streamlit is in requirements.txt)
-#RUN pip install -r requirements.txt
-
-# If you don't have requirements.txt, uncomment the line below to install Streamlit directly
-# RUN pip install streamlit
-
-RUN pip install streamlit tensorflow
+# Install Python dependencies
+RUN pip install --no-cache-dir streamlit tensorflow-cpu  # or tensorflow-lite if available
 
 # Expose the default Streamlit port
 EXPOSE 8501
