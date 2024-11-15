@@ -3,6 +3,8 @@ import numpy as np
 from PIL import Image
 import tensorflow as tf
 
+
+
 class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 
 
@@ -30,6 +32,14 @@ def predict_image(interpreter, image):
 def lesson_1():
     st.subheader("TFLite Model Image Classification")
     st.write("Upload a TFLite model and an image to perform predictions.")
+    st.markdown("""
+        You can create the model using the code in the following [Colab notebook](https://colab.research.google.com/github/Seeed-Projects/Tutorial-of-AI-Kit-with-Raspberry-Pi-From-Zero-to-Hero/blob/main/notebook/Chapter1/TensorFlow_CNN.ipynb):
+
+        <a target="_blank" href="https://colab.research.google.com/github/Seeed-Projects/Tutorial-of-AI-Kit-with-Raspberry-Pi-From-Zero-to-Hero/blob/main/notebook/Chapter1/TensorFlow_CNN.ipynb">
+          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+        </a>
+    """, unsafe_allow_html=True)
+
     model_file = st.file_uploader("Upload TFLite model", type=["tflite"])
     if model_file:
         model_path = "loaded.tflite"
@@ -41,7 +51,7 @@ def lesson_1():
         image_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
         if image_file:
             image = Image.open(image_file)
-            st.image(image, caption="Uploaded Image", use_column_width=True)
+            st.image(image, caption="Uploaded Image", use_container_width=True)  # Updated parameter
             input_image = preprocess_image(image)
             predictions = predict_image(interpreter, input_image)
             predicted_label = np.argmax(predictions)

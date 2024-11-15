@@ -36,6 +36,16 @@ def predict_image(interpreter, image):
 
 
 def lesson_2():
+    st.markdown("""
+        **This lesson is designed to test your trained model using ImageNet with up to 1000 classes.**
+        You do not need to upload anything as we have prepared everything for you. 
+        You only need to upload the image, and the model will classify it based on ImageNet's classes.
+    """)
+    st.markdown("""
+        You can find more information about configuring TensorFlow on the Raspberry Pi environment in the following link:
+        [Introduction to TensorFlow in Raspberry Pi Environment](https://seeed-projects.github.io/Tutorial-of-AI-Kit-with-Raspberry-Pi-From-Zero-to-Hero/docs/Chapter%202%20-%20Configuring%20the%20RaspberryPi%20Environment/Introduction_to_TensorFlow_in_Raspberry_Pi_Environment)
+    """)
+
     st.subheader("EfficientNet Image Classification")
     interpreter = load_efficientnet_model()
     labels = load_labels()
@@ -43,7 +53,7 @@ def lesson_2():
     image_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
     if image_file:
         image = Image.open(image_file)
-        st.image(image, caption="Uploaded Image", use_column_width=True)
+        st.image(image, caption="Uploaded Image", use_container_width=True)
         input_image = preprocess_image_efficientnet(image)
         predictions = predict_image(interpreter, input_image)
         top_k = 3
